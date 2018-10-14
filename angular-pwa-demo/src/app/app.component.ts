@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
         if (confirm('New version is available. Load New Version?')) {
-          window.location.reload();
+          // window.location.reload();
+          this.swUpdate.activateUpdate().then(() => document.location.reload());
         }
       });
     }
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
         if (sub) {
           const subscriptionModel = this.getSubscriptionModel(sub);
 
-          if (this.currentEndpoint && this.currentEndpoint === subscriptionModel.endpoint){
+          if (this.currentEndpoint && this.currentEndpoint === subscriptionModel.endpoint) {
             return;
           }
 
